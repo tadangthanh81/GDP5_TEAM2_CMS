@@ -1,57 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html xmlns:th="http://www.thymeleaf.org">
 
 <head th:replace="head"></head>
 
 <body class="hold-transition skin-blue sidebar-mini">
-  <!-- Site wrapper -->
-  <div class="wrapper">
+	<!-- Site wrapper -->
+	<div class="wrapper">
 
-    <!-- header -->
-    <header th:replace="headerUser"></header>
+		<!-- header -->
+		<header th:replace="headerUser"></header>
 
-    <!-- =============================================== -->
+		<!-- =============================================== -->
 
-    <!-- Left side column. contains the sidebar -->
-    <aside th:replace="navigation"></aside>
+		<!-- Left side column. contains the sidebar -->
+		<aside th:replace="navigation"></aside>
 
-    <!-- =============================================== -->
+		<!-- =============================================== -->
 
-    <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-        <div th:replace="infoUser"></div>
-      <!-- /.content -->
-    </div>
-    <!-- /.content-wrapper -->
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
 
 
-	<!-- footer -->
-    <div th:replace="footer"></div>
-    <!-- /.control-sidebar -->
-    <!-- Add the sidebar's background. This div must be placed
+			<div th:replace="listMenu"></div>
+			
+		</div>
+		<!-- /.content-wrapper -->
+
+
+		<!-- footer -->
+		<div th:replace="footer"></div>
+		<!-- /.control-sidebar -->
+		<!-- Add the sidebar's background. This div must be placed
        immediately after the control sidebar -->
-    <div class="control-sidebar-bg"></div>
-  </div>
-  <!-- ./wrapper -->
+		<div class="control-sidebar-bg"></div>
+	</div>
+	<!-- ./wrapper -->
 
-    <div th:replace="footerScript"></div>
+	<div th:replace="footerScript"></div>
 
-  <script>
-    $(document).ready(function () {
-      $('.sidebar-menu').tree()
-    })
-    $(function () {
-      $('#example1').DataTable()
-      $('#example2').DataTable({
-        'paging': true,
-        'lengthChange': false,
-        'searching': false,
-        'ordering': true,
-        'info': true,
-        'autoWidth': false
-      })
-    })
-  </script>
+	<script>
+		$(document).ready(function() {
+			$('.sidebar-menu').tree()
+		})
+		$(function() {
+			$('#example1').DataTable()
+			$('#example2').DataTable({
+				'paging' : true,
+				'lengthChange' : false,
+				'searching' : false,
+				'ordering' : true,
+				'info' : true,
+				'autoWidth' : false
+			})
+		})
+	</script>
 </body>
 
 </html>

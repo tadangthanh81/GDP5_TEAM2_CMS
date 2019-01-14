@@ -1,16 +1,17 @@
-/**
- * 
- */
 package gdp5.team2.cms.repository;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import java.util.List;
+
+import org.springframework.data.repository.CrudRepository;
 
 import gdp5.team2.cms.entity.Menu;
 
-/**
- * @author User
- *
- */
-public interface MenuRepository extends JpaRepository<Menu, Integer> {
+
+
+
+public interface MenuRepository extends CrudRepository<Menu, Integer> {
+
+//    List<Menu> findByNameContaining(String q);
+	
 
 }

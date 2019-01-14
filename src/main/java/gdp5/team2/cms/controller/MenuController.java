@@ -1,88 +1,63 @@
 package gdp5.team2.cms.controller;
 
-import java.util.List;
+import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import gdp5.team2.cms.entity.Menu;
 import gdp5.team2.cms.service.MenuService;
 
 
-
+@Controller
 public class MenuController {
+	
+	@Autowired
+	MenuService menuService;
 
-	@RestController
-	@RequestMapping("/api")
-	public class EmployeeRestController {
+	@RequestMapping("/menu")
+	public String listMenu(Model model) {
+		model.addAttribute("menus", menuService.findAll());
+		return "menu";
+	}
 
-		private MenuService menusService;
+	@GetMapping("/menu/create")
+	public String create(Model model) {
+		model.addAttribute("menu", new Menu());
+		return "formMenu";
+	}
 
-		@Autowired
-		public EmployeeRestController(MenuService theMenusService) {
-			menusService = theMenusService;
+	@GetMapping("menu/edit/{id}")
+	public String edit(@PathVariable int id, Model model) {
+		model.addAttribute("menu", menuService.findById(id));
+		return "formMenu";
+	}
+	
+	
+
+
+	@RequestMapping("/menu/save")
+	public String createSlider(@Valid Menu menu, BindingResult result, RedirectAttributes redirect) {
+
+		if (result.hasErrors()) {
+			return "/menu";
 		}
-
-		@GetMapping("/menus")
-		public List<Menu> findAll() {
-			return menusService.findAll();
-		}
-
-		@GetMapping("/menus/{menuId}")
-		public Menu getEmployee(@PathVariable int menuId) {
-
-			Menu theMenu = menusService.findById(menuId);
-
-			if (theMenu == null) {
-				throw new RuntimeException("Menu id not found - " + menuId);
-			}
-
-			return theMenu;
-		}
-
-		@PostMapping("/menus")
-		public Menu addMenu(@RequestBody Menu theMenu) {
-
-			// also just in case they pass an id in JSON ... set id to 0
-			// this is to force a save of new item ... instead of update
-
-			theMenu.setMenuID(0);
-
-			menusService.save(theMenu);
-
-			return theMenu;
-		}
-
-		@PutMapping("/menus")
-		public Menu updateMenu(@RequestBody Menu theMenu) {
-
-			menusService.save(theMenu);
-
-			return theMenu;
-		}
-
-		@DeleteMapping("/menus/{menuId}")
-		public String deleteMenu(@PathVariable int menuId) {
-
-			Menu tempMenu = menusService.findById(menuId);
-
-			// throw exception if null
-
-			if (tempMenu == null) {
-				throw new RuntimeException("Menu id not found - " + menuId);
-			}
-
-			menusService.deleteById(menuId);
-
-			return "Deleted menu id - " + menuId;
-		}
-
+		menuService.save(menu);
+		redirect.addFlashAttribute("message", "Saved menu successfully!");
+		return "redirect:/menu";
+	}
+	@GetMapping("/menu/delete/{id}")
+	public String delete(@PathVariable int id, RedirectAttributes redirect) {
+		menuService.delete(id);
+		redirect.addFlashAttribute("success", "Deleted menu successfully!");
+		return "redirect:/menu";
 	}
 }
