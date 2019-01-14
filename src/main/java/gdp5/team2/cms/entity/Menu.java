@@ -35,5 +35,70 @@ public class Menu {
 	@OneToMany
 	@JoinColumn(name="menu_id")
 	Set<RoleMenu> roleMenus;
+
+	public Menu(int menuID, String menuName, String descrpition, String controller, String functions,
+			Set<RoleMenu> roleMenus) {
+		super();
+		this.menuID = menuID;
+		this.menuName = menuName;
+		this.descrpition = descrpition;
+		this.controller = controller;
+		this.functions = functions;
+		this.roleMenus = roleMenus;
+	}
+
+	public Menu() {
+		super();
+	}
+
+	public int getMenuID() {
+		return menuID;
+	}
+
+	public void setMenuID(int menuID) {
+		this.menuID = menuID;
+	}
+
+	public String getMenuName() {
+		return menuName;
+	}
+
+	public void setMenuName(String menuName) {
+		this.menuName = menuName;
+	}
+
+	public String getDescrpition() {
+		return descrpition;
+	}
+
+	public void setDescrpition(String descrpition) {
+		this.descrpition = descrpition;
+	}
+
+	public String getController() {
+		return controller;
+	}
+
+	public void setController(String controller) {
+		this.controller = controller;
+	}
+
+	public String getFunctions() {
+		return functions;
+	}
+
+	public void setFunctions(String functions) {
+		this.functions = functions;
+	}
+
+	public Set<RoleMenu> getRoleMenus() {
+		return roleMenus;
+	}
+
+	public void setRoleMenus(Set<RoleMenu> roleMenus) {
+		this.roleMenus = roleMenus;
+	}
+	
+	
 	
 }

@@ -45,27 +45,27 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter implemen
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable()
-				.authorizeRequests().antMatchers("/resources/**", "/login/**").permitAll()
-			.and()
-				.authorizeRequests().antMatchers("/register/**").permitAll()
-			.and()
-				.authorizeRequests().anyRequest().authenticated()
-			.and()
-				.formLogin()
-				.loginPage("/login").usernameParameter("email").passwordParameter("password")
-				.defaultSuccessUrl("/index").failureUrl("/404")
-			.and()
-				.logout().logoutUrl("/logout").deleteCookies("JSESSIONID")
-			.and()
-				.authorizeRequests().antMatchers(HttpMethod.GET, "/news/**","/news").access("hasRole('DEV')")
-			.and()
-				.authorizeRequests().antMatchers("/user/**").access("hasRole('Admin')");
+//		http.csrf().disable()
+//				.authorizeRequests().antMatchers("/resources/**", "/login/**").permitAll()
+//			.and()
+//				.authorizeRequests().antMatchers("/register/**").permitAll()
+//			.and()
+//				.authorizeRequests().anyRequest().authenticated()
+//			.and()
+//				.formLogin()
+//				.loginPage("/login").usernameParameter("email").passwordParameter("password")
+//				.defaultSuccessUrl("/index").failureUrl("/404")
+//			.and()
+//				.logout().logoutUrl("/logout").deleteCookies("JSESSIONID")
+//			.and()
+//				.authorizeRequests().antMatchers(HttpMethod.GET, "/news/**","/news").access("hasRole('DEV')")
+//			.and()
+//				.authorizeRequests().antMatchers("/user/**").access("hasRole('Admin')");
 	}
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(u);
+//		auth.userDetailsService(u);
 	}
 
 	private static final String[] CLASSPATH_RESOURCE_LOCATIONS = { "classpath:/META-INF/resources/",
