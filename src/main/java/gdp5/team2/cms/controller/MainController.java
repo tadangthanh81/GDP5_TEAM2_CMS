@@ -18,10 +18,10 @@ public class MainController {
 		
 		return "login.html";
 	}
-	@RequestMapping("/index")
-	public String index() {
-		return "index.html";
-	}
+//	@RequestMapping("/index")
+//	public String index() {
+//		return "index.html";
+//	}
 	@GetMapping("/404")
 	public String ds() {
 		return "404.html";

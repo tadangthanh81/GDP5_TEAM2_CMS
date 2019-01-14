@@ -12,8 +12,16 @@ import gdp5.team2.cms.entity.Users;
 @Service
 public interface UserService {
 	Optional<Users> findByEmail(String name);
-	
+
 	Set<String> authen(int id);
 
 	Collection<? extends GrantedAuthority> getAuthorities(int id);
+
+	Iterable<Users> findAll();
+
+	Optional<Users> findOne(int id);
+
+	void save(Users user);
+
+	void delete(int id);
 }

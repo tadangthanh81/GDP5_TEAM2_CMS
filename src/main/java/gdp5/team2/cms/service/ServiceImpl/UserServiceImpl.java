@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -45,7 +46,7 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 		for (String d : s) {
 			String[] n = d.split(",");
 			for (String j : n) {
-				listAuthen.add(j);
+				listAuthen.add("ROLE_" + j.toUpperCase());
 			}
 		}
 		return listAuthen;
@@ -68,13 +69,42 @@ public class UserServiceImpl implements UserDetailsService, UserService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+//		UserDetails cs = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
 		Optional<Users> user = userRepository.findByEmail(username);
 		System.out.println(getGrantedAuthority(authen(user.get().getUserID())));
-		return new org.springframework.security.core.userdetails.User(
-		          user.get().getEmail(), passwordEncoder().encode(user.get().getPassword()),getGrantedAuthority(authen(user.get().getUserID())));
+		return new org.springframework.security.core.userdetails.User(user.get().getEmail(),
+				passwordEncoder().encode(user.get().getPassword()),
+				getGrantedAuthority(authen(user.get().getUserID())));
 	}
+
 	@Bean
 	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
+	}
+
+	@Override
+	public Iterable<Users> findAll() {
+		// TODO Auto-generated method stub
+		return userRepository.findAll();
+	}
+
+	
+	@Override
+	public Optional<Users> findOne(int id) {
+		// TODO Auto-generated method stub
+		return userRepository.findById(id);
+	}
+
+	@Override
+	public void save(Users user) {
+		userRepository.save(user);
+		
+	}
+
+	@Override
+	public void delete(int id) {
+		userRepository.deleteById(id);
+		
 	}
 }
