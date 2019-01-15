@@ -28,6 +28,7 @@ public class RegisterController {
 	@Autowired
 	public JavaMailSender emailSender;
 
+	@Autowired
 	PasswordEncoder passwordEncoder;
 
 	public RegisterController(UserService userService, JavaMailSender emailSender) {
@@ -37,7 +38,8 @@ public class RegisterController {
 	}
 
 	@RequestMapping("/register")
-	public String register() {
+	public String register(Model model) {
+		model.addAttribute("userRegister", new Users());
 		return "register";
 	}
 	
@@ -71,13 +73,7 @@ public class RegisterController {
 	 
 	        // Send Message!
 	        this.emailSender.send(message);
-			return "redirect:/register";
+	        return "redirect:/register";
 		}
-		
-	}
-	
-	@GetMapping("/index")
-	public String returnAdmin(Model model) {
-		return "index";
 	}
 }

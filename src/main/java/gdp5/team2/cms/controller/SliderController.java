@@ -1,7 +1,6 @@
 package gdp5.team2.cms.controller;
 
 import javax.validation.Valid;
-import javax.websocket.server.PathParam;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,10 +20,10 @@ public class SliderController {
 	@Autowired
 	SliderService sliderService;
 
-	@RequestMapping("/index")
+	@RequestMapping("/slider")
 	public String listSlider(Model model) {
 		model.addAttribute("sliders", sliderService.findAll());
-		return "index";
+		return "listSlider";
 	}
 
 	@GetMapping("/slider/create")

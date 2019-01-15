@@ -1,68 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
 
-<!-- Content Header (Page header) -->
-<section class="content-header">
-	<h1>
-		Member <small>admin and client</small>
-	</h1>
-	<ol class="breadcrumb">
-		<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
-		<li><a href="#">Examples</a></li>
-		<li class="active">Blank page</li>
-	</ol>
-</section>
+<head th:replace="head"></head>
 
-<section class="content">
-	<div class="row">
-		<div class="col-xs-12">
-			<div class="box table-wrapper">
-				<div class="table-title">
-					<div class="row">
-						<div class="col-sm-6">
-							<h2>
-								Manage <b>News</b>
-							</h2>
-						</div>
-						<!-- <div class="col-sm-6">
+<body class="hold-transition skin-blue sidebar-mini">
+	<!-- Site wrapper -->
+	<div class="wrapper">
+
+		<!-- header -->
+		<header th:replace="headerUser"></header>
+
+		<!-- =============================================== -->
+
+		<!-- Left side column. contains the sidebar -->
+		<aside th:replace="navigation"></aside>
+
+		<!-- =============================================== -->
+
+		<!-- Content Wrapper. Contains page content -->
+		<div class="content-wrapper">
+			<!-- Content Header (Page header) -->
+			<section class="content-header">
+				<h1>
+					Member <small>admin and client</small>
+				</h1>
+				<ol class="breadcrumb">
+					<li><a href="#"><i class="fa fa-dashboard"></i> Home</a></li>
+					<li><a href="#">Examples</a></li>
+					<li class="active">Blank page</li>
+				</ol>
+			</section>
+
+			<section class="content">
+				<div class="row">
+					<div class="col-xs-12">
+						<div class="box table-wrapper">
+							<div class="table-title">
+								<div class="row">
+									<div class="col-sm-6">
+										<h2>
+											Manage <b>News</b>
+										</h2>
+									</div>
+									<!-- <div class="col-sm-6">
                                                 <a href="#addEmployeeModal" class="btn btn-success" ><i class="glyphicon glyphicon-plus-sign"></i> <span>Add New User</span></a>
                                             </div> -->
+								</div>
+							</div>
+							<!-- /.box-header -->
+							<div class="box-body">
+								<table id="example2" class="table table-bordered table-hover">
+									<thead>
+										<tr>
+											<th>Rendering engine</th>
+											<th>Browser</th>
+											<th>Platform(s)</th>
+											<th>Engine version</th>
+											<th>CSS grade</th>
+											<th>Tool</th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>Trident</td>
+											<td>Internet Explorer 4.0</td>
+											<td>Win 95+</td>
+											<td>4</td>
+											<td>X</td>
+											<td><a href="newsDetail.html" class="view"><i
+													class="glyphicon glyphicon-eye-open" title="View"></i></a> <a
+												href="#editEmployeeModal" class="edit"><i
+													class="glyphicon glyphicon-edit" title="Edit"></i></a> <a
+												href="#deleteEmployeeModal" class="delete"
+												data-toggle="modal"><i class="glyphicon glyphicon-trash"
+													title="Delete"></i></a></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<!-- /.box-body -->
+						</div>
+						<!-- /.box -->
 					</div>
+					<!-- /.col -->
 				</div>
-				<!-- /.box-header -->
-				<div class="box-body">
-					<table id="example2" class="table table-bordered table-hover">
-						<thead>
-							<tr>
-								<th>Rendering engine</th>
-								<th>Browser</th>
-								<th>Platform(s)</th>
-								<th>Engine version</th>
-								<th>CSS grade</th>
-								<th>Tool</th>
-							</tr>
-						</thead>
-						<tbody>
-							<tr>
-								<td>Trident</td>
-								<td>Internet Explorer 4.0</td>
-								<td>Win 95+</td>
-								<td>4</td>
-								<td>X</td>
-								<td><a href="newsDetail.html" class="view"><i
-										class="glyphicon glyphicon-eye-open" title="View"></i></a> <a
-									href="#editEmployeeModal" class="edit"><i
-										class="glyphicon glyphicon-edit" title="Edit"></i></a> <a
-									href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i
-										class="glyphicon glyphicon-trash" title="Delete"></i></a></td>
-							</tr>
-						</tbody>
-					</table>
-				</div>
-				<!-- /.box-body -->
-			</div>
-			<!-- /.box -->
+				<!-- /.row -->
+			</section>
+			<!-- /.content -->
+
+
 		</div>
-		<!-- /.col -->
+		<!-- /.content-wrapper -->
+
+
+		<!-- footer -->
+		<div th:replace="footer"></div>
+		<!-- /.control-sidebar -->
+		<!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+		<div class="control-sidebar-bg"></div>
 	</div>
-	<!-- /.row -->
-</section>
-<!-- /.content -->
+	<!-- ./wrapper -->
+
+	<div th:replace="footerScript"></div>
+
+	<script>
+		$(document).ready(function() {
+			$('.sidebar-menu').tree()
+		})
+		$(function() {
+			$('#example1').DataTable()
+			$('#example2').DataTable({
+				'paging' : true,
+				'lengthChange' : false,
+				'searching' : false,
+				'ordering' : true,
+				'info' : true,
+				'autoWidth' : false
+			})
+		})
+	</script>
+</body>
+
+</html>

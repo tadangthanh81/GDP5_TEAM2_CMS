@@ -35,6 +35,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter implemen
 					.antMatchers("/register/**").permitAll()
 			.antMatchers(HttpMethod.GET,"/user/**").access("hasRole('ROLE_ADMIN')")
 			.antMatchers(HttpMethod.GET, "/news/**").access("hasRole('ROLE_DEV') or hasRole('ROLE_ADMIN')")
+			.antMatchers(HttpMethod.GET, "/slider/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_DEV')")
 			.anyRequest().authenticated()
 			.and()
 				.formLogin()
@@ -42,6 +43,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter implemen
 				.defaultSuccessUrl("/index").failureUrl("/login")
 			.and()
 				.logout().logoutUrl("/logout").deleteCookies("JSESSIONID")
+				
+				
 			;
 		http.exceptionHandling().accessDeniedPage("/404");
 	}
