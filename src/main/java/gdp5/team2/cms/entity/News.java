@@ -1,18 +1,25 @@
 package gdp5.team2.cms.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
+
+@Entity
+@Table(name="news")
 public class News {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "news_id", nullable=false)
-	private int new_id;
+	private int newsID;
 
 	@Column(name = "url", nullable=false, length=225)
 	private String url;
@@ -32,7 +39,7 @@ public class News {
 	@Column(name = "is_hot", nullable=false, length=50)
 	private String isHot;
 
-	@OneToOne
+	@ManyToOne(cascade=CascadeType.DETACH,fetch=FetchType.LAZY)
 	@JoinColumn(name = "user_id")
 	private Users user;
 
@@ -48,10 +55,10 @@ public class News {
 	@Column(name = "approved_at", nullable=false, length=50)
 	private String approvedAt;
 
-	public News(int new_id, String url, String title, String description, String content, String newsStatus,
+	public News(int newsID, String url, String title, String description, String content, String newsStatus,
 			String isHot, Users user, int approverID, String createdAt, String updatedAt, String approvedAt) {
 		super();
-		this.new_id = new_id;
+		this.newsID = newsID;
 		this.url = url;
 		this.title = title;
 		this.description = description;
@@ -67,14 +74,19 @@ public class News {
 
 	public News() {
 		super();
+	}	
+
+	public News(int newsID) {
+		super();
+		this.newsID = newsID;
 	}
 
 	public int getNewsID() {
-		return new_id;
+		return newsID;
 	}
 
 	public void setNewsID(int newsID) {
-		this.new_id = newsID;
+		this.newsID = newsID;
 	}
 
 	public String getUrl() {

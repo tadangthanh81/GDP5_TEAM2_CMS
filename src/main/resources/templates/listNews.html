@@ -19,7 +19,6 @@
 
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
-			<!-- Content Header (Page header) -->
 			<section class="content-header">
 				<h1>
 					Member <small>admin and client</small>
@@ -48,36 +47,69 @@
 								</div>
 							</div>
 							<!-- /.box-header -->
-							<div class="box-body">
-								<table id="example2" class="table table-bordered table-hover">
-									<thead>
-										<tr>
-											<th>Rendering engine</th>
-											<th>Browser</th>
-											<th>Platform(s)</th>
-											<th>Engine version</th>
-											<th>CSS grade</th>
-											<th>Tool</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr>
-											<td>Trident</td>
-											<td>Internet Explorer 4.0</td>
-											<td>Win 95+</td>
-											<td>4</td>
-											<td>X</td>
-											<td><a href="newsDetail.html" class="view"><i
-													class="glyphicon glyphicon-eye-open" title="View"></i></a> <a
-												href="#editEmployeeModal" class="edit"><i
-													class="glyphicon glyphicon-edit" title="Edit"></i></a> <a
-												href="#deleteEmployeeModal" class="delete"
-												data-toggle="modal"><i class="glyphicon glyphicon-trash"
-													title="Delete"></i></a></td>
-										</tr>
-									</tbody>
-								</table>
+
+							<div>
+								<!-- search form -->
+								<form class="form-inline pull-right" action="#"
+									th:action="@{/news/search}" method="GET">
+									<div class="input-group">
+										<input type="text" name="title" class="form-control"
+											placeholder="Search..."> <span
+											class="input-group-btn">
+											<button type="submit" name="search" id="search-btn"
+												class="btn btn-flat">
+												<i class="fa fa-search"></i>
+											</button>
+										</span>
+									</div>
+								</form>
+								<!-- /.search form -->
 							</div>
+
+
+							<th:block th:if="${#lists.isEmpty(listNews)}">
+								<h3>No News</h3>
+							</th:block>
+
+							<th:block th:unless="${#lists.isEmpty(listNews)}">
+								<div class="box-body">
+									<table id="example2" class="table table-bordered table-hover">
+										<thead>
+											<tr>
+												<th>URL</th>
+												<th>Title</th>
+												<th>Description</th>
+												<th>News Status</th>
+												<th>Date</th>
+												<th>Tool</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="news : ${listNews}">
+												<td th:text="${news.url}"></td>
+												<td th:text="${news.title}"></td>
+												<td th:text="${news.description}"></td>
+												<td th:text="${news.newsStatus}"></td>
+												<td th:text="${news.createdAt}"></td>
+												<td><a th:href="@{/news/view/{id}(id=${news.newsID})}"
+													class="view"><i class="glyphicon glyphicon-eye-open"
+														title="View"></i></a> <a
+													th:href="@{/news/edit/{id}(id=${news.newsID})}"
+													class="edit"><i class="glyphicon glyphicon-edit"
+														title="Edit"></i></a> <a
+													th:href="@{/news/delete/{id}(id=${news.newsID})}"
+													class="delete" data-toggle="modal"><i
+														class="glyphicon glyphicon-trash" title="Delete"></i></a></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</th:block>
+									<div class="box-footer">
+										<a th:href="@{/news/create}" class="btn btn-success pull-left">
+											<span class="glyphicon glyphicon-plus"></span> Add news
+										</a>
+									</div>
 							<!-- /.box-body -->
 						</div>
 						<!-- /.box -->
@@ -86,8 +118,6 @@
 				</div>
 				<!-- /.row -->
 			</section>
-			<!-- /.content -->
-
 
 		</div>
 		<!-- /.content-wrapper -->
@@ -123,3 +153,4 @@
 </body>
 
 </html>
+

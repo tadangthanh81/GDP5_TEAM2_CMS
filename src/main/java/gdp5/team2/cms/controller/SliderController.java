@@ -45,14 +45,14 @@ public class SliderController {
 			return "/index";
 		}
 		sliderService.save(slider);
-		redirect.addFlashAttribute("message", "Saved employee successfully!");
-		return "redirect:/index";
+		redirect.addFlashAttribute("message", "Saved successfully!");
+		return "redirect:/listSlider";
 	}
 	@GetMapping("/slider/delete/{id}")
 	public String delete(@PathVariable int id, RedirectAttributes redirect) {
 		sliderService.delete(id);
-		redirect.addFlashAttribute("success", "Deleted employee successfully!");
-		return "redirect:/index";
+		redirect.addFlashAttribute("success", "Deleted successfully!");
+		return "redirect:/listSlider";
 	}
 
 }
