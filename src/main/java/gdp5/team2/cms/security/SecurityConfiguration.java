@@ -44,11 +44,13 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter implemen
 				.logout().logoutUrl("/logout").deleteCookies("JSESSIONID")
 			;
 		http.exceptionHandling().accessDeniedPage("/404");
+
 	}
 
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
 		auth.userDetailsService(userServiceImpl);
+
 	}
 
 	private static final String[] CLASSPATH_RESOURCE_LOCATIONS = { "classpath:/META-INF/resources/",
