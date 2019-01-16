@@ -53,7 +53,7 @@ public class NewsController {
 		}
 		newsService.save(news);
 		redirect.addFlashAttribute("success", "Add news success!");
-		return "redirect:/listNews";
+		return "redirect:/news";
 	}
 
 	@GetMapping("/news/edit/{id}")
@@ -66,7 +66,7 @@ public class NewsController {
 	public String deleteNews(@PathVariable int id, RedirectAttributes redirect) {
 		newsService.delete(id);
 		redirect.addFlashAttribute("success", "Delete news success!");
-		return "redirect:/listNews";
+		return "redirect:/news";
 	}
 
 	@GetMapping("/news/search")

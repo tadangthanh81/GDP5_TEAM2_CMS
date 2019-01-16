@@ -61,18 +61,19 @@ public class RegisterController {
 			}
 			
 			String random = (new Random().nextInt(899999) + 10000) + "";
-			userRegister2.setPassword(passwordEncoder.encode(random));
+			String pass = userRegister2.getPassword();
+			userRegister2.setPassword(passwordEncoder.encode(pass));
 			userService.save(userRegister2);
 			redirect.addFlashAttribute("success", "Register successtion");
-	        SimpleMailMessage message = new SimpleMailMessage();
-	         
-	        message.setTo(userRegister2.getEmail());
-	        message.setSubject("Send Password");
-	        message.setText("Your password:"
-					+ userRegister2.getPassword());
-	 
-	        // Send Message!
-	        this.emailSender.send(message);
+//	        SimpleMailMessage message = new SimpleMailMessage();
+//	          
+//	        message.setTo(userRegister2.getEmail());
+//	        message.setSubject("Send Password");
+//	        message.setText("Your password:"
+//					+ userRegister2.getPassword());
+//	 
+//	        // Send Message!
+//	        this.emailSender.send(message);
 	        return "redirect:/register";
 		}
 	}
