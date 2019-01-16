@@ -20,6 +20,7 @@
 		<!-- Content Wrapper. Contains page content -->
 		<div class="content-wrapper">
 			<section class="content-header">
+
                 <h1>
                     User Profile
                 </h1>
@@ -85,27 +86,17 @@
                                                     <th>
                                                         Permission
                                                     </th>
-                                                    <th>Create news</th>
-                                                    <th>update news</th>
-                                                    <th>Delete news</th>
+                                                    <th th:each="menu : ${listMenu}" th:value="${menu.menu_name}" th:text="${menu.menu_name}"></th>
                                                 </tr>
                                                 <tr>
-                                                    <td>ADMIN</td>
-                                                    <td>
+                                                    <td>Menu</td>
+                                                    <th th:each="menu : ${listMenu}" th:value="${menu.menu_name}">
                                                         <div class="form-group">
                                                             <label>
-                                                                <input type="checkbox" class="minimal" checked disabled>
+                                                                <input type="checkbox" td:id="${menu.menu_id}" class="minimal" checked>
                                                             </label>
                                                         </div>
                                                     </td>
-                                                    <td>
-                                                        <label>
-                                                            <input type="checkbox" class="minimal" checked>
-                                                        </label>
-                                                    </td>
-                                                    <td><label>
-                                                            <input type="checkbox" class="minimal" checked>
-                                                        </label></td>
                                                 </tr>
                                             </table>
                                         </div>
@@ -175,7 +166,6 @@
                     <!-- /.col -->
                 </div>
                 <!-- /.row -->
-
             </section>
 
 		</div>
@@ -212,3 +202,4 @@
 </body>
 
 </html>
+

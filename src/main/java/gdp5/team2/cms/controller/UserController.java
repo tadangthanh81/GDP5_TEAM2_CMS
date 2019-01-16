@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import gdp5.team2.cms.service.MenuService;
 import gdp5.team2.cms.service.RolesService;
 import gdp5.team2.cms.service.UserService;
 
@@ -21,6 +22,9 @@ public class UserController {
 	@Autowired
 	RolesService rolesService;
 	
+	@Autowired
+	MenuService menuService;
+	
 	@RequestMapping("/user")
 	public String indexUser(Model model) {
 		model.addAttribute("listUser", userService.findAll());
@@ -31,6 +35,7 @@ public class UserController {
 	public String viewNews(@PathVariable int id, Model model) {
 		model.addAttribute("user", userService.findOne(id));
 		model.addAttribute("listRoles", rolesService.findAll());
+		model.addAttribute("listMenu", menuService.findAll());
 		return "infoUser";
 	}
 }
