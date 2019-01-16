@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -23,6 +24,7 @@ import gdp5.team2.cms.service.ServiceImpl.UserServiceImpl;
 @Configuration
 @EnableWebSecurity
 @EnableWebMvc
+@EnableGlobalMethodSecurity(prePostEnabled= true)
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter implements WebMvcConfigurer {
 
 	@Autowired
@@ -31,8 +33,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter implemen
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.csrf().disable()
-				.authorizeRequests().antMatchers("/resources/**", "/login/**").permitAll()
-					.antMatchers("/register/**").permitAll()
+				.authorizeRequests().antMatchers("/resources/**", "/login/**","/register/**").permitAll()
 			.antMatchers(HttpMethod.GET,"/user/**").access("hasRole('ROLE_ADMIN')")
 			.antMatchers(HttpMethod.GET, "/news/**").access("hasRole('ROLE_DEV') or hasRole('ROLE_ADMIN')")
 			.antMatchers(HttpMethod.GET, "/slider/**").access("hasRole('ROLE_ADMIN') or hasRole('ROLE_DEV')")

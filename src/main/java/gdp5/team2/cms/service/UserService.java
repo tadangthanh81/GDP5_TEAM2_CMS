@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 
 import gdp5.team2.cms.entity.Users;
 
-@Service
+
 public interface UserService {
 	Optional<Users> findByEmail(String name);
 

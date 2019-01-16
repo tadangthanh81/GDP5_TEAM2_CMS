@@ -3,13 +3,12 @@
  */
 package gdp5.team2.cms.controller;
 
-import javax.servlet.http.HttpServletResponse;
+import java.security.Principal;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import gdp5.team2.cms.service.UserService;
 
@@ -29,15 +28,12 @@ public class LoginController {
 	 * @param httpServletResponse
 	 * @return
 	 */
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public void login(@RequestParam("email") String email, @RequestParam("password") String pass, HttpServletResponse httpServletResponse) {
-//		Optional<Users> lsuser = userService.findByEmail(email);
-//		if (lsuser.isPresent()) {
-//			Users us = lsuser.get();
-//			if (pass.equals(us.getPassword())) {
-//				return "redirect:index.html";
-//			}
-//		}
-//		return "login.html";
+//	@PreAuthorize("!isAuthenticated()")
+	@RequestMapping("/login")
+	public String login(Principal principal) {
+		if (principal != null) {
+			return "index.html";
+		} else
+			return "login.html";
 	}
 }

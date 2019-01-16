@@ -48,6 +48,7 @@ public class SliderController {
 		redirect.addFlashAttribute("message", "Saved successfully!");
 		return "redirect:/listSlider";
 	}
+	
 	@GetMapping("/slider/delete/{id}")
 	public String delete(@PathVariable int id, RedirectAttributes redirect) {
 		sliderService.delete(id);
