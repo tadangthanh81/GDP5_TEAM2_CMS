@@ -105,12 +105,12 @@
                                     <!-- /.post -->
                                 </div>
                                 <div class="tab-pane" id="settings">
-                                    <form class="form-horizontal">
+                                    <form th:action="" th:objecet="${user}" class="form-horizontal">
                                         <div class="form-group">
                                             <label for="inputName" class="col-sm-2 control-label">Full Name</label>
 
                                             <div class="col-sm-10">
-                                                <input type="email" class="form-control" id="inputName" placeholder="Full Name" required="required">
+                                                <input type="email" th:field="*{fullName}" class="form-control" id="inputName" placeholder="Full Name" required="required">
                                             </div>
                                         </div>
                                         <div class="form-group">

@@ -47,36 +47,33 @@
 							</th:block>
 							<!-- /.box-header -->
 							<th:block th:unless="${#lists.isEmpty(listUser)}">
-							<div class="box-body">
-								<table id="example1" class="table table-bordered table-striped">
-									<thead>
-										<tr>
-											<th>User ID</th>
-											<th>Full name</th>
-											<th>Email</th>
-											<th>Mobile</th>
-											<th>Status</th>
-											<th>Tool</th>
-										</tr>
-									</thead>
-									<tbody>
-										<tr th:each="news : ${listUser}">
+								<div class="box-body">
+									<table id="example1" class="table table-bordered table-striped">
+										<thead>
+											<tr>
+												<th>User ID</th>
+												<th>Full name</th>
+												<th>Email</th>
+												<th>Mobile</th>
+												<th>Status</th>
+												<th>Tool</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr th:each="news : ${listUser}">
 												<td th:text="${news.userID}"></td>
 												<td th:text="${news.fullName}"></td>
 												<td th:text="${news.email}"></td>
 												<td th:text="${news.mobile}"></td>
 												<td th:text="${news.userStatus}"></td>
-												<td><a th:href="@{/listUser/view/{id}(id=${news.userID})}"
+												<td><a
+													th:href="@{/listUser/view/{id}(id=${news.userID})}"
 													class="view"><i class="glyphicon glyphicon-eye-open"
-														title="View"></i></a>
-														<a
-													th:href="@{/listUser/delete/{id}(id=${news.userID})}"
-													class="delete" data-toggle="modal"><i
-														class="glyphicon glyphicon-trash" title="Delete"></i></a></td>
+														title="View"></i></a></td>
 											</tr>
-									</tbody>
-								</table>
-							</div>
+										</tbody>
+									</table>
+								</div>
 							</th:block>
 							<!-- /.box-body -->
 						</div>
